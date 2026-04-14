@@ -1,0 +1,12 @@
+langchain4j:
+  open-ai:
+    chat-model:
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+      api-key: sk-f9c4c5103a1345deb1bf057a1d3cb6d7
+      model-name: qwen-plus
+      log-requests: true
+      log-responses: true
+
+logging:
+  level:
+    dev.langchain4j: debug

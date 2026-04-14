@@ -1,9 +1,9 @@
 package com.sube.ai.controller;
 
 import com.sube.ai.service.ConsultantService;
-import dev.langchain4j.model.openai.OpenAiChatModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 /**
  * @program: ai-4-java
@@ -25,8 +25,8 @@ public class ChatController {
 //        return chatModel.chat(msg);
 //    }
 
-    @GetMapping("/chat")
-    private String reqStream(@RequestParam("msg") String msg) {
+    @GetMapping(value = "/chat", produces = "text/s;charset=utf-8")
+    private Flux<String> reqStream(@RequestParam("msg") String msg) {
         return consultantService.chat(msg);
     }
 

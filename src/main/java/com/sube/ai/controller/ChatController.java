@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
  * @create: 2026-04-10 13:36
  **/
 @RestController
-@RequestMapping("/ai")
+@RequestMapping
 @RequiredArgsConstructor
 public class ChatController {
     private final ConsultantService consultantService;
@@ -25,8 +25,9 @@ public class ChatController {
 //        return chatModel.chat(msg);
 //    }
 
-    @GetMapping(value = "/chat", produces = "text/s;charset=utf-8")
-    private Flux<String> reqStream(@RequestParam("msg") String msg) {
+
+    @GetMapping(value = "/chat", produces = "text/plain;charset=utf-8")
+    public Flux<String> reqStream(@RequestParam("msg") String msg) {
         return consultantService.chat(msg);
     }
 

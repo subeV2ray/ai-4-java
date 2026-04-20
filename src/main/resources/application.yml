@@ -17,4 +17,10 @@ langchain4j:
 logging:
   level:
     dev:
-      langchain4j: info
+      langchain4j: debug
+
+spring:
+  data:
+    redis:
+      host: 8.137.85.146
+      password: 990916..

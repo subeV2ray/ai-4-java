@@ -27,8 +27,8 @@ public class ChatController {
 
 
     @GetMapping(value = "/chat", produces = "text/plain;charset=utf-8")
-    public Flux<String> reqStream(@RequestParam("msg") String msg) {
-        return consultantService.chat(msg);
+    public Flux<String> reqStream(@RequestParam("memoryId") String memoryId, @RequestParam("msg") String msg) {
+        return consultantService.chat(memoryId, msg);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.sube.ai.service;
 
+import dev.langchain4j.service.MemoryId;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
@@ -17,12 +18,14 @@ import reactor.core.publisher.Flux;
         wiringMode = AiServiceWiringMode.EXPLICIT, // 手动装配
         chatModel = "openAiChatModel", // 指定模型
         streamingChatModel = "openAiStreamingChatModel",
-        chatMemory = "chatMemory"
+        chatMemory = "chatMemory", // 配置会话记忆对象
+        chatMemoryProvider = "chatMemoryProvider" // 配置会话记忆提供者对象
 )
 public interface ConsultantService {
 //    String chat(String msg);
 //    @SystemMessage("你是一个Java领域专家，只回答Java相关的问题。如果被问到不属于Java的问题，直接拒绝回答")
     @SystemMessage(fromResource = "system.txt")
 //    @UserMessage("你是一个Java领域专家，只回答Java相关的问题。如果被问到不属于Java的问题，直接拒绝回答{{msg}}")
-    Flux<String> chat(/*@V("msg")*/ String msg);
+//    Flux<String> chat(/*@V("msg")*/ String msg);
+    Flux<String> chat(@MemoryId String memoryId, @UserMessage String msg);
 }

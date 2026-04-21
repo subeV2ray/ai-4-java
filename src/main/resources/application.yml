@@ -12,7 +12,12 @@ langchain4j:
       model-name: tongyi-xiaomi-analysis-flash
       log-requests: true
       log-responses: true
-
+    embedding-model:
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+      api-key: sk-8bf22b8896e146cf988c3d61e1d2546c
+      model-name: text-embedding-v3
+      log-requests: true
+      log-responses: true
 
 logging:
   level:

@@ -1,12 +1,11 @@
 package com.sube.ai.config;
 
-import com.sube.ai.service.ConsultantService;
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.DocumentSplitter;
 import dev.langchain4j.data.document.loader.ClassPathDocumentLoader;
-import dev.langchain4j.data.document.loader.FileSystemDocumentLoader;
 import dev.langchain4j.data.document.parser.apache.pdfbox.ApachePdfBoxDocumentParser;
 import dev.langchain4j.data.document.splitter.DocumentSplitters;
+import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.ChatMemoryProvider;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
@@ -14,14 +13,12 @@ import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
-import dev.langchain4j.service.AiServices;
-import dev.langchain4j.service.spring.AiService;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
+import dev.langchain4j.store.embedding.qdrant.QdrantEmbeddingStore;
 import dev.langchain4j.store.memory.chat.ChatMemoryStore;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -101,6 +98,16 @@ public class CommonConfig {
                 .embeddingModel(embeddingModel)
                 .minScore(0.5)
                 .maxResults(3)
+                .build();
+    }
+
+    @Bean
+    public EmbeddingStore<TextSegment> qdrantEmbeddingStore() {
+        return QdrantEmbeddingStore.builder()
+                .host("127.0.0.1")          // Qdrant 的主机地址
+                .port(6334)                 // Qdrant gRPC 端口 (注意是 6334)
+                .collectionName("msca-ai")  // 你的集合(Collection)名称
+                // .apiKey("your_api_key")  // 如果有鉴权密码可以加上这行
                 .build();
     }
 }

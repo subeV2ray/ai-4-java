@@ -18,6 +18,11 @@ langchain4j:
       model-name: text-embedding-v3
       log-requests: true
       log-responses: true
+  community:
+    redis:
+      host: 127.0.0.1
+      password: 990916
+
 
 logging:
   level:
